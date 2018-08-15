@@ -18,7 +18,7 @@ function get_task_list($filter = null) {
         . ' JOIN projects ON tasks.project_id = projects.project_id';
 
   if($filter) {
-    $orderBy = ' ORDER BY projects.title ASC, date DESC'
+    $orderBy = ' ORDER BY projects.title ASC, date DESC';
   } else {
     $orderBy = ' ORDER BY date DESC';
   }
