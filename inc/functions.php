@@ -12,25 +12,40 @@ function get_project_list() {
 }
 
 function get_task_list($filter = null) {
-  include 'connection.php';
-
-  $sql = 'SELECT tasks.*, projects.title as project FROM tasks'
+    include 'connection.php';
+    
+    $sql = 'SELECT tasks.*, projects.title as project FROM tasks'
         . ' JOIN projects ON tasks.project_id = projects.project_id';
-
-  if($filter) {
-    $orderBy = ' ORDER BY projects.title ASC, date DESC';
-  } else {
+    
+    if (is_array($filter)) {
+        switch ($filter[0]) {
+          case 'project':
+                $where = ' WHERE projects.project_id = ?';
+                break;
+          case 'category':
+                $where = ' WHERE category = ?';
+                break;
+          default:
+                $where = '';
+        }
+    }
+    
     $orderBy = ' ORDER BY date DESC';
-  }
-
-  try {
-    $results = $db -> prepare($sql . $orderBy);
-    $results -> execute();
-  } catch (Exception $e) {
-    echo 'Error: ' . $e -> getMessage() . '<br />';
-    return array();
-  }
-  return $results -> fetchAll(PDO::FETCH_ASSOC);
+    if ($filter) {
+        $orderBy = ' ORDER BY projects.title ASC, date DESC';
+    }
+    
+    try {
+        $results = $db->prepare($sql . $where . $orderBy);
+        if (is_array($filter)) {
+            $results->bindValue(1, $filter[1]);
+        }
+        $results->execute();
+    } catch (Exception $e) {
+        echo "Error!: " . $e->getMessage() . "<br />";
+        return array();
+    }
+    return $results->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function add_project($title, $category) {
