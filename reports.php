@@ -31,6 +31,36 @@ include 'inc/header.php';
                         <option value="category:Billable">Billable</option>
                         <option value="category:Charity">Charity</option>
                         <option value="category:Personal">Personal</option>
+                    </optgroup>   
+                    <optgroup label="Date">
+                        <option value="date:<?php
+                            echo date('m/d/Y', strtotime('-2 Sunday'));
+                            echo ":";
+                            echo date('m/d/Y', strtotime('-1 Saturday'));
+                            ?>">
+                            Last Week
+                        </option>
+                        <option value="date:<?php
+                            echo date('m/d/Y', strtotime('-1 Sunday'));
+                            echo ":";
+                            echo date('m/d/Y');
+                            ?>">
+                            This Week
+                        </option>
+                        <option value="date:<?php
+                            echo date('m/d/Y', strtotime('first day of last month'));
+                            echo ":";
+                            echo date('m/d/Y', strtotime('last day of last month'));
+                            ?>">
+                            Last Month
+                        </option>
+                        <option value="date:<?php
+                            echo date('m/d/Y', strtotime('first day of this month'));
+                            echo ":";
+                            echo date('m/d/Y');
+                            ?>">
+                            This Month
+                        </option>
                     </optgroup>
                 </select>
                 <input type="submit" class="button" value="Run">
