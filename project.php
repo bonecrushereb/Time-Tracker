@@ -39,11 +39,7 @@ include 'inc/header.php';
                 echo 'Add';
             }
             ?> Project</h1>
-            <?php 
-            if (isset($error_message)) {
-                echo "<p class='message'>$error_message</p>";
-            }
-            ?>
+   
             <form class="form-container form-add" method="post" action="project.php">
                 <table>
                     <tr>

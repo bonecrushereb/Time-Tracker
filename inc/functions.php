@@ -94,6 +94,22 @@ function get_project($project_id){
     return $results->fetch();
 }
 
+function delete_project($project_id){
+    include 'connection.php';
+    
+    $sql = 'DELETE FROM projects WHERE project_id = ?';
+    
+    try {
+        $results = $db->prepare($sql);
+        $results->bindValue(1, $project_id, PDO::PARAM_INT);
+        $results->execute();
+    } catch (Exception $e) {
+        echo "Error!: " . $e->getMessage() . "<br />";
+        return false;
+    }
+    return true;
+}
+
 function add_task($project_id, $title, $date, $time, $task_id = null) {
   include 'connection.php';
 
