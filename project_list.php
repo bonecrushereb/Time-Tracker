@@ -24,7 +24,8 @@ include 'inc/header.php';
                 <ul class="items">
                     <?php
                     foreach(get_project_list() as $item) {
-                        echo "<li><a href='project.php?id=" . $item['project_id'] . "'>" . $item['title'] . "</a></li>";
+                        echo "<p style='text-align: right; font-size: 12px'>" . $item['category'] . "</p>";
+                        echo "<li style='text-align: center;'><a href='project.php?id=" . $item['project_id'] . "'>" . $item['title'] . "</a></li>";
                     }
                     ?>
                 </ul>
