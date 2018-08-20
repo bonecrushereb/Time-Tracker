@@ -45,7 +45,7 @@ include 'inc/header.php';
                     echo "<p style='font-size:12px; text-align: left;'>" . $item['date'] . "</p>";
                     echo "<p style='font-size:12px; text-align: right;'> time (min): " . $item['time'] . "</p>";
                     echo "<li style='text-align: center;'><a href='task.php?id=" . $item['task_id'] . "'>" . $item['title'] . "</a>\n";
-                    echo "<form method='post' action='task_list.php'>\n";
+                    echo "<form method='post' action='task_list.php' onsubmit=\"return confirm('Are you sure you want to delete this task?');\">\n";
                     echo "<input type='hidden' value='" . $item['task_id'] . "' name='delete'>\n";
                     echo "<input type='submit' class='button--delete' value='Delete'>\n";
                     echo "</form>\n";

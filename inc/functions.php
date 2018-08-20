@@ -97,7 +97,7 @@ function get_project($project_id){
 function delete_project($project_id){
     include 'connection.php';
     
-    $sql = 'DELETE FROM projects WHERE project_id = ?';
+    $sql = 'DELETE FROM projects WHERE project_id = ? AND project_id NOT IN (SELECT project_id FROM tasks)';
     
     try {
         $results = $db->prepare($sql);
@@ -107,7 +107,11 @@ function delete_project($project_id){
         echo "Error!: " . $e->getMessage() . "<br />";
         return false;
     }
-    return true;
+    if($results -> rowCount() > 0) {      
+      return true;
+    } else {
+      return false;
+    }
 }
 
 function add_task($project_id, $title, $date, $time, $task_id = null) {

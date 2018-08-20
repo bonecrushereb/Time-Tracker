@@ -43,7 +43,7 @@ include 'inc/header.php';
                     foreach(get_project_list() as $item) {
                         echo "<p style='text-align: right; font-size: 12px'>" . $item['category'] . "</p>";
                         echo "<li style='text-align: center;'><a href='project.php?id=" . $item['project_id'] . "'>" . $item['title'] . "</a>\n";
-                        echo "<form method='post' action='project_list.php'>\n";
+                        echo "<form method='post' action='project_list.php' onsubmit=\"return confirm('Are you sure you want to delete this project?');\">\n";                        
                         echo "<input type='hidden' value='" . $item['project_id'] . "' name='delete'>\n";
                         echo "<input type='submit' class='button--delete' value='Delete'>\n";
                         echo "</form>\n";
